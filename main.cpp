@@ -4,8 +4,22 @@
 #include "ray.h"
 #include "buffer.h"
 
+bool HitSphere( const glm::vec3& center, float radius, const Ray& ray)
+{
+    glm::vec3 oc = ray.Origin() - center;
+    float a = glm::dot( ray.Direction(), ray.Direction() );
+    float b = 2.0 * glm::dot( oc, ray.Direction() );
+    float c = glm::dot( oc, oc ) - radius*radius;
+    float discriminant = b*b - 4 * a * c;
+    return (discriminant > 0);
+
+
+}
+
 glm::vec3 Color( const Ray& ray) 
 {
+    if( HitSphere( glm::vec3( 0.0f, 0.0f, -1.0f), 0.5f, ray ) )
+        return glm::vec3( 1.0f, 0.0f, 0.0f );
     glm::vec3 unit_direction = glm::normalize( ray.Direction() );
     float t = 0.5*( unit_direction.y + 1.0f );
     return (1.0f - t) * glm::vec3( 1.0f ) + t * glm::vec3( 0.5f, 0.7f, 1.0f );
