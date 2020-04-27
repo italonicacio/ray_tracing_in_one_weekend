@@ -20,10 +20,10 @@ buffer.o: buffer.cpp
 	$(CXX) -c $(CXXFLAGS) buffer.cpp -o buffer.o
 
 
-.PHONY: clean run png clpng
+.PHONY: clean run png clpng view
 
 clean:
-	rm *.o $(EXECUTABLE) $(IMAGE).ppm $(IMAGE).png
+	rm *.o $(EXECUTABLE) $(IMAGE).ppm 
 
 run: $(EXECUTABLE)
 	./$(EXECUTABLE)
@@ -33,3 +33,8 @@ png: $(IMAGE).ppm
 
 clpng: $(IMAGE).png
 	rm $(IMAGE).png
+
+view: $(IMAGE).ppm
+	gwenview $(IMAGE).ppm
+
+
