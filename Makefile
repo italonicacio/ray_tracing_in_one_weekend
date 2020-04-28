@@ -8,7 +8,7 @@ IMAGE = output_image
 
 LDLIBS =
 
-OBJ = main.o buffer.o sphere.o hitable_list.o
+OBJ = main.o buffer.o sphere.o hitable_list.o camera.o
 
 $(EXECUTABLE):  $(OBJ)
 	$(CXX) $(OBJ) -o $(EXECUTABLE) $(LDLIBS)
@@ -24,6 +24,9 @@ sphere.o: sphere.cpp
 
 hitable_list.o: hitable_list.cpp
 	$(CXX) -c $(CXXFLAGS) hitable_list.cpp
+
+camera.o: camera.cpp
+	$(CXX) -c $(CXXFLAGS) camera.cpp
 
 
 .PHONY: clean run png clpng view
