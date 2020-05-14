@@ -45,9 +45,9 @@ void Buffer::Save( const std::string &file_name )
     for( int y = this->v_resolution - 1; y >= 0; y-- )
         for( int x = 0; x < this->h_resolution; x++ )
         {
-            rendering_file << static_cast< int >( clamp( buffer_data[x][y][0] ) * 255.0f + 0.5f ) << " ";
-            rendering_file << static_cast< int >( clamp( buffer_data[x][y][1] ) * 255.0f + 0.5f ) << " ";
-            rendering_file << static_cast< int >( clamp( buffer_data[x][y][2] ) * 255.0f + 0.5f ) << " ";
+            rendering_file << static_cast< int >( glm::sqrt( clamp( buffer_data[x][y][0] ) ) * 255.0f + 0.5f ) << " ";
+            rendering_file << static_cast< int >( glm::sqrt( clamp( buffer_data[x][y][1] ) ) * 255.0f + 0.5f ) << " ";
+            rendering_file << static_cast< int >( glm::sqrt( clamp( buffer_data[x][y][2] ) ) * 255.0f + 0.5f ) << " ";
             
         }
     
