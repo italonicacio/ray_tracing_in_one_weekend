@@ -6,6 +6,9 @@ Sphere::Sphere() {}
 Sphere::Sphere( glm::vec3 center, float radius ) : center( center ), radius( radius )
 {}
 
+Sphere::Sphere( glm::vec3 center, float radius, Material* material ) : center( center ), radius( radius ), material(material)
+{}
+
 bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& record) const
 {
     glm::vec3 oc = ray.Origin() - this->center;
@@ -22,6 +25,7 @@ bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& record) co
             record.t = temp;
             record.p = ray.PointAtParameter( record.t );
             record.normal = ( record.p - this->center ) / radius;
+            record.material = this->material;
             return true;
         }
 
@@ -31,6 +35,7 @@ bool Sphere::Hit(const Ray& ray, float t_min, float t_max, HitRecord& record) co
             record.t = temp;
             record.p = ray.PointAtParameter( record.t );
             record.normal = ( record.p - center ) / radius;
+            record.material = this->material;
             return true;
         }
     }
