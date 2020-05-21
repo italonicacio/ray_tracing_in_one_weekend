@@ -32,7 +32,7 @@ camera.o: camera.cpp
 .PHONY: clean run png clpng view
 
 clean:
-	rm *.o $(EXECUTABLE) $(IMAGE).ppm 
+	rm *.o $(EXECUTABLE) 
 
 run: $(EXECUTABLE)
 	./$(EXECUTABLE)

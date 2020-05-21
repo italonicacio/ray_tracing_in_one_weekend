@@ -9,6 +9,7 @@
 #include "material.h"
 
 
+
 glm::vec3 Color( const Ray& ray, Hitable *world, int depth) 
 {
     HitRecord record;
@@ -20,7 +21,7 @@ glm::vec3 Color( const Ray& ray, Hitable *world, int depth)
         
         if( depth < 50 && record.material->Scatter( ray, record, attenuation, scattered ) )
         {
-            return attenuation * Color(scattered, world, depth++);
+            return attenuation * Color(scattered, world, depth+1);
         }else{
             return glm::vec3(0.0f);
         }
@@ -42,13 +43,17 @@ int main()
 
     int sample = 100;
     
-    Hitable *list[4];
-    list[0] = new Sphere( glm::vec3( 0.0f, 0.0f, -1.0f ), 0.5f, new Lambertian( glm::vec3( 0.8f, 0.3f, 0.3f ) ) );
+#define SIZE 5
+
+    Hitable *list[SIZE];
+    list[0] = new Sphere( glm::vec3( 0.0f, 0.0f, -1.0f ), 0.5f, new Lambertian( glm::vec3( 0.1f, 0.2f, 0.5f ) ) );
     list[1] = new Sphere( glm::vec3( 0.0f, -100.5f, -1.0f ), 100.0f, new Lambertian( glm::vec3( 0.8f, 0.8f, 0.0f )));
-    list[2] = new Sphere( glm::vec3( 1.0f, 0.0f, -1.0f ), 0.5f, new Metal( glm::vec3( 0.8f, 0.6f, 0.2f ), 0.3f));
-    list[3] = new Sphere( glm::vec3( -1.0f, 0.0f, -1.0f ), 0.5f, new Metal( glm::vec3( 0.8f, 0.8f, 0.8f ), 1.0f));
+    list[2] = new Sphere( glm::vec3( 1.0f, 0.0f, -1.0f ), 0.5f, new Metal( glm::vec3( 0.8f, 0.6f, 0.2f ), 1.0f));
+    list[3] = new Sphere( glm::vec3( -1.0f, 0.0f, -1.0f ), 0.5f, new Dieletric( 1.5f ) );
+    list[4] = new Sphere( glm::vec3( -1.0f, 0.0f, -1.0f ), -0.45f, new Dieletric( 1.5f ) );
+
     
-    Hitable *world = new HitableList( list, 4);
+    Hitable *world = new HitableList( list, SIZE);
 
     Buffer buffer(x_resolution, y_resolution);
     Camera camera;
