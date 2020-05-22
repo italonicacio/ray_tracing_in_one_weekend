@@ -1,12 +1,12 @@
 CXX = g++
 
-CXXFLAGS =  -g3 -O0 -Wall -Werror -std=c++11
+CXXFLAGS =  -g3 -O0 -Wall -Werror -std=c++11 -fopenmp
 
 EXECUTABLE = raytracer
 
 IMAGE = output_image
 
-LDLIBS =
+LDLIBS = -fopenmp
 
 OBJ = main.o buffer.o sphere.o hitable_list.o camera.o
 
